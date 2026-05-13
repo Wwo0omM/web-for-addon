@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Toolkit - Create 3D with AI</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="starfield-minimal.css">
+</head>
+<body>
+    <div class="app">
+        <header class="top-header">
+            <div class="logo">
+                <h1>AI Toolkit</h1>
+            </div>
+            <nav class="menu">
+                <button class="menu-item active" data-section="home">
+                    <span class="menu-label">Home</span>
+                </button>
+                <button class="menu-item" data-section="features">
+                    <span class="menu-label">Features</span>
+                </button>
+                <button class="menu-item" data-section="showcase">
+                    <span class="menu-label">Showcase</span>
+                </button>
+                <button class="menu-item cta-button">
+                    <span class="menu-label">Get Started</span>
+                </button>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <!-- Home Section -->
+            <div class="section home-section active" id="home">
+                <!-- Starfield Background -->
+                <canvas id="starfield-canvas"></canvas>
+
+                <!-- Hero -->
+                <div class="hero-container">
+                    <div class="hero-content">
+                        <h1 class="hero-title">Create 3D with AI</h1>
+                        <p class="hero-subtitle">
+                            Generate stunning 3D models from text or images directly in Blender.<br>
+                            No modeling skills required. Just describe what you want.
+                        </p>
+                        <div class="hero-buttons">
+                            <button class="btn btn-primary">Get Started</button>
+                            <button class="btn btn-secondary">
+                                <span class="play-icon">▶</span> Watch Demo
+                            </button>
+                        </div>
+                    </div>
+                    <div class="hero-visual">
+                        <div class="floating-card card-1">
+                            <div class="card-glow"></div>
+                            <div class="card-content">
+                                <div class="icon-3d">🎨</div>
+                                <p>Text to 3D</p>
+                            </div>
+                        </div>
+                        <div class="floating-card card-2">
+                            <div class="card-glow"></div>
+                            <div class="card-content">
+                                <div class="icon-3d">🖼️</div>
+                                <p>Image to 3D</p>
+                            </div>
+                        </div>
+                        <div class="floating-card card-3">
+                            <div class="card-glow"></div>
+                            <div class="card-content">
+                                <div class="icon-3d">⚡</div>
+                                <p>Fast Generation</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Features Section -->
+                <section class="features-section">
+                    <h2 class="section-heading">Powerful Features</h2>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">✍️</div>
+                            <h3>Text to 3D</h3>
+                            <p>Describe your vision in words and watch AI bring it to life in 3D</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🖼️</div>
+                            <h3>Image to 3D</h3>
+                            <p>Upload any image and transform it into a fully-formed 3D model</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">⚡</div>
+                            <h3>Lightning Fast</h3>
+                            <p>Generate high-quality models in seconds, not hours</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🔌</div>
+                            <h3>Blender Integration</h3>
+                            <p>Seamlessly integrated into your Blender workflow</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- How It Works -->
+                <section class="how-it-works">
+                    <h2 class="section-heading">How It Works</h2>
+                    <div class="steps-container">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <h3>Enter Prompt</h3>
+                            <p>Type a description or upload an image</p>
+                        </div>
+                        <div class="step-arrow">→</div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <h3>AI Generates</h3>
+                            <p>Our AI creates your 3D model</p>
+                        </div>
+                        <div class="step-arrow">→</div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <h3>Import to Blender</h3>
+                            <p>Use it in your project instantly</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Benefits -->
+                <section class="benefits-section">
+                    <div class="benefits-grid">
+                        <div class="benefit-item">
+                            <div class="benefit-icon">⏱️</div>
+                            <h3>Save Time</h3>
+                            <p>Create models 10x faster than traditional modeling</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">🎓</div>
+                            <h3>No Skills Needed</h3>
+                            <p>Anyone can create professional 3D models</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">💎</div>
+                            <h3>High Quality</h3>
+                            <p>Production-ready models with clean topology</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- CTA Section -->
+                <section class="cta-section">
+                    <div class="cta-content">
+                        <h2>Ready to Transform Your Workflow?</h2>
+                        <p>Join thousands of artists already creating with AI</p>
+                        <button class="btn btn-primary btn-large">Try AI Toolkit Now</button>
+                    </div>
+                </section>
+
+                <!-- Footer -->
+                <footer class="footer">
+                    <div class="footer-content">
+                        <div class="footer-logo">
+                            <h3>AI Toolkit</h3>
+                            <p>Create 3D with AI</p>
+                        </div>
+                        <div class="footer-links">
+                            <a href="#">Documentation</a>
+                            <a href="#">Support</a>
+                            <a href="#">Privacy</a>
+                            <a href="#">Terms</a>
+                        </div>
+                    </div>
+                    <div class="footer-bottom">
+                        <p>© 2026 AI Toolkit. All rights reserved.</p>
+                    </div>
+                </footer>
+            </div>
+
+            <!-- Features Page -->
+            <div class="section" id="features">
+                <h1 class="page-title">Features</h1>
+                <p class="page-description">Explore all the powerful capabilities of AI Toolkit</p>
+            </div>
+
+            <!-- Showcase Page -->
+            <div class="section" id="showcase">
+                <h1 class="page-title">Showcase</h1>
+                <p class="page-description">See what others have created with AI Toolkit</p>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+    <script src="starfield-canvas.js"></script>
+</body>
+</html>

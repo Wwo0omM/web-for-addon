@@ -1,0 +1,53 @@
+/* Minimal Clean Starfield - Canvas Implementation */
+
+#starfield-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* Override previous starfield styles */
+.starfield {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+/* Hide all decorative elements */
+.nebula,
+.dust-layer,
+.special-star,
+.pulsing-star,
+.shooting-star,
+.floating-blob,
+.glow-star-1,
+.glow-star-2,
+.glow-star-3,
+.glow-star-4,
+.glow-star-5,
+.pulse-1,
+.pulse-2,
+.pulse-3,
+.shoot-1,
+.shoot-2,
+.shoot-3,
+.blob-1,
+.blob-2,
+.blob-3,
+.blob-4,
+.stars-layer,
+.stars-distant,
+.stars-far,
+.stars-mid,
+.stars-near,
+.stars-closest {
+    display: none !important;
+}
