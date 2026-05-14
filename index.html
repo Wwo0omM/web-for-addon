@@ -1,197 +1,583 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Toolkit - Create 3D with AI</title>
+    <title>AI Toolkit — Creative AI inside Blender</title>
+    <meta name="description" content="AI tools for Blender workflows. Generate, iterate, and import 3D content directly into your scene.">
     <link rel="icon" type="image/png" href="site_icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="starfield-minimal.css">
 </head>
 <body>
-    <div class="app">
-        <header class="top-header">
-            <div class="logo">
-                <h1>AI Toolkit</h1>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+    <div class="container nav__inner">
+        <a href="#" class="nav__brand">
+            <span class="nav__mark">◣</span>
+            <span class="nav__name">AI Toolkit</span>
+            <span class="nav__tag">for Blender</span>
+        </a>
+        <nav class="nav__menu" aria-label="Primary">
+            <a href="#capabilities">Capabilities</a>
+            <a href="#workflow">Workflow</a>
+            <a href="#integration">Blender</a>
+            <a href="#showcase">Showcase</a>
+            <a href="#docs">Docs</a>
+        </nav>
+        <div class="nav__actions">
+            <a href="#docs" class="link-quiet">Manual</a>
+            <a href="#download" class="btn btn--solid">Download</a>
+        </div>
+        <button class="nav__toggle" aria-label="Open menu" id="navToggle">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</header>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+    <div class="container hero__grid">
+        <div class="hero__meta">
+            <span class="eyebrow">v 1.4 — Blender 4.x</span>
+        </div>
+
+        <div class="hero__headline">
+            <h1 class="display">
+                Creative AI<br>
+                inside <em>Blender</em>.
+            </h1>
+        </div>
+
+        <div class="hero__lede">
+            <p>
+                A focused toolkit for generating, refining, and importing 3D content
+                without leaving the viewport. Built for artists who care about the result.
+            </p>
+            <div class="hero__cta">
+                <a href="#download" class="btn btn--solid">Download addon</a>
+                <a href="#workflow" class="btn btn--ghost">See the workflow →</a>
             </div>
-            <nav class="menu">
-                <button class="menu-item active" data-section="home">
-                    <span class="menu-label">Home</span>
-                </button>
-                <button class="menu-item" data-section="features">
-                    <span class="menu-label">Features</span>
-                </button>
-                <button class="menu-item" data-section="showcase">
-                    <span class="menu-label">Showcase</span>
-                </button>
-                <button class="menu-item cta-button">
-                    <span class="menu-label">Get Started</span>
-                </button>
-            </nav>
-        </header>
+        </div>
 
-        <main class="main-content">
-            <!-- Home Section -->
-            <div class="section home-section active" id="home">
-                <!-- Starfield Background -->
-                <canvas id="starfield-canvas"></canvas>
-
-                <!-- Hero -->
-                <div class="hero-container">
-                    <div class="hero-content">
-                        <h1 class="hero-title">Create 3D with AI</h1>
-                        <p class="hero-subtitle">
-                            Generate stunning 3D models from text or images directly in Blender.<br>
-                            No modeling skills required. Just describe what you want.
-                        </p>
-                        <div class="hero-buttons">
-                            <button class="btn btn-primary">Get Started</button>
-                            <button class="btn btn-secondary">
-                                <span class="play-icon">▶</span> Watch Demo
-                            </button>
-                        </div>
+        <div class="hero__panel">
+            <div class="panel">
+                <div class="panel__bar">
+                    <span class="panel__dot"></span>
+                    <span class="panel__title">N-Panel · AI Toolkit</span>
+                    <span class="panel__shortcut">N</span>
+                </div>
+                <div class="panel__body">
+                    <div class="panel__row">
+                        <span class="panel__label">Mode</span>
+                        <span class="panel__value">Text → Mesh</span>
                     </div>
-                    <div class="hero-visual">
-                        <div class="floating-card card-1">
-                            <div class="card-glow"></div>
-                            <div class="card-content">
-                                <div class="icon-3d">🎨</div>
-                                <p>Text to 3D</p>
-                            </div>
-                        </div>
-                        <div class="floating-card card-2">
-                            <div class="card-glow"></div>
-                            <div class="card-content">
-                                <div class="icon-3d">🖼️</div>
-                                <p>Image to 3D</p>
-                            </div>
-                        </div>
-                        <div class="floating-card card-3">
-                            <div class="card-glow"></div>
-                            <div class="card-content">
-                                <div class="icon-3d">⚡</div>
-                                <p>Fast Generation</p>
-                            </div>
-                        </div>
+                    <div class="panel__row panel__row--input">
+                        <span class="panel__label">Prompt</span>
+                        <span class="panel__value panel__value--mono">a brutalist concrete bench, weathered</span>
+                    </div>
+                    <div class="panel__row">
+                        <span class="panel__label">Topology</span>
+                        <span class="panel__value">Quads · 8k</span>
+                    </div>
+                    <div class="panel__row">
+                        <span class="panel__label">Status</span>
+                        <span class="panel__value panel__value--accent">Ready to import</span>
+                    </div>
+                    <div class="panel__progress">
+                        <div class="panel__progress-bar"></div>
+                    </div>
+                    <div class="panel__actions">
+                        <button class="panel__btn panel__btn--primary">Generate</button>
+                        <button class="panel__btn">Import</button>
                     </div>
                 </div>
-
-                <!-- Features Section -->
-                <section class="features-section">
-                    <h2 class="section-heading">Powerful Features</h2>
-                    <div class="features-grid">
-                        <div class="feature-card">
-                            <div class="feature-icon">✍️</div>
-                            <h3>Text to 3D</h3>
-                            <p>Describe your vision in words and watch AI bring it to life in 3D</p>
-                        </div>
-                        <div class="feature-card">
-                            <div class="feature-icon">🖼️</div>
-                            <h3>Image to 3D</h3>
-                            <p>Upload any image and transform it into a fully-formed 3D model</p>
-                        </div>
-                        <div class="feature-card">
-                            <div class="feature-icon">⚡</div>
-                            <h3>Lightning Fast</h3>
-                            <p>Generate high-quality models in seconds, not hours</p>
-                        </div>
-                        <div class="feature-card">
-                            <div class="feature-icon">🔌</div>
-                            <h3>Blender Integration</h3>
-                            <p>Seamlessly integrated into your Blender workflow</p>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- How It Works -->
-                <section class="how-it-works">
-                    <h2 class="section-heading">How It Works</h2>
-                    <div class="steps-container">
-                        <div class="step">
-                            <div class="step-number">1</div>
-                            <h3>Enter Prompt</h3>
-                            <p>Type a description or upload an image</p>
-                        </div>
-                        <div class="step-arrow">→</div>
-                        <div class="step">
-                            <div class="step-number">2</div>
-                            <h3>AI Generates</h3>
-                            <p>Our AI creates your 3D model</p>
-                        </div>
-                        <div class="step-arrow">→</div>
-                        <div class="step">
-                            <div class="step-number">3</div>
-                            <h3>Import to Blender</h3>
-                            <p>Use it in your project instantly</p>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Benefits -->
-                <section class="benefits-section">
-                    <div class="benefits-grid">
-                        <div class="benefit-item">
-                            <div class="benefit-icon">⏱️</div>
-                            <h3>Save Time</h3>
-                            <p>Create models 10x faster than traditional modeling</p>
-                        </div>
-                        <div class="benefit-item">
-                            <div class="benefit-icon">🎓</div>
-                            <h3>No Skills Needed</h3>
-                            <p>Anyone can create professional 3D models</p>
-                        </div>
-                        <div class="benefit-item">
-                            <div class="benefit-icon">💎</div>
-                            <h3>High Quality</h3>
-                            <p>Production-ready models with clean topology</p>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- CTA Section -->
-                <section class="cta-section">
-                    <div class="cta-content">
-                        <h2>Ready to Transform Your Workflow?</h2>
-                        <p>Join thousands of artists already creating with AI</p>
-                        <button class="btn btn-primary btn-large">Try AI Toolkit Now</button>
-                    </div>
-                </section>
-
-                <!-- Footer -->
-                <footer class="footer">
-                    <div class="footer-content">
-                        <div class="footer-logo">
-                            <h3>AI Toolkit</h3>
-                            <p>Create 3D with AI</p>
-                        </div>
-                        <div class="footer-links">
-                            <a href="#">Documentation</a>
-                            <a href="#">Support</a>
-                            <a href="#">Privacy</a>
-                            <a href="#">Terms</a>
-                        </div>
-                    </div>
-                    <div class="footer-bottom">
-                        <p>© 2026 AI Toolkit. All rights reserved.</p>
-                    </div>
-                </footer>
             </div>
+        </div>
 
-            <!-- Features Page -->
-            <div class="section" id="features">
-                <h1 class="page-title">Features</h1>
-                <p class="page-description">Explore all the powerful capabilities of AI Toolkit</p>
+        <div class="hero__stats">
+            <div class="stat">
+                <span class="stat__num">12+</span>
+                <span class="stat__label">AI tools</span>
             </div>
-
-            <!-- Showcase Page -->
-            <div class="section" id="showcase">
-                <h1 class="page-title">Showcase</h1>
-                <p class="page-description">See what others have created with AI Toolkit</p>
+            <div class="stat">
+                <span class="stat__num">~8s</span>
+                <span class="stat__label">Avg. generation</span>
             </div>
-        </main>
+            <div class="stat">
+                <span class="stat__num">4.x</span>
+                <span class="stat__label">Blender support</span>
+            </div>
+            <div class="stat">
+                <span class="stat__num">.blend</span>
+                <span class="stat__label">Native output</span>
+            </div>
+        </div>
     </div>
+</section>
 
-    <script src="app.js"></script>
-    <script src="starfield-canvas.js"></script>
+<!-- ============ MARQUEE / KEYWORDS ============ -->
+<section class="ticker" aria-hidden="true">
+    <div class="ticker__track">
+        <span>Text → Mesh</span><span>·</span>
+        <span>Image → Mesh</span><span>·</span>
+        <span>PBR Materials</span><span>·</span>
+        <span>Retopology</span><span>·</span>
+        <span>UV Unwrap</span><span>·</span>
+        <span>HDRI Synthesis</span><span>·</span>
+        <span>Reference Boards</span><span>·</span>
+        <span>Asset Library</span><span>·</span>
+        <span>Text → Mesh</span><span>·</span>
+        <span>Image → Mesh</span><span>·</span>
+        <span>PBR Materials</span><span>·</span>
+        <span>Retopology</span><span>·</span>
+    </div>
+</section>
+
+<!-- ============ CAPABILITIES ============ -->
+<section class="section" id="capabilities">
+    <div class="container">
+        <header class="section__head">
+            <span class="eyebrow">01 — Capabilities</span>
+            <h2 class="h2">Tools, not magic.</h2>
+            <p class="lede">
+                Each tool is built around a single Blender task. Use them on their own,
+                or chain them into a workflow that fits how you already work.
+            </p>
+        </header>
+
+        <div class="caps">
+            <article class="cap">
+                <span class="cap__num">01</span>
+                <h3 class="cap__title">Text to Mesh</h3>
+                <p class="cap__body">
+                    Describe the object. Get clean, scale-aware geometry directly in
+                    your scene. Quads by default, with topology hints.
+                </p>
+                <span class="cap__tag">Geometry</span>
+            </article>
+
+            <article class="cap">
+                <span class="cap__num">02</span>
+                <h3 class="cap__title">Image to Mesh</h3>
+                <p class="cap__body">
+                    Drop a reference, sketch, or photo. Generate a mesh that matches
+                    silhouette and proportion, ready to refine.
+                </p>
+                <span class="cap__tag">Geometry</span>
+            </article>
+
+            <article class="cap">
+                <span class="cap__num">03</span>
+                <h3 class="cap__title">PBR Materials</h3>
+                <p class="cap__body">
+                    Albedo, roughness, normal, height — generated as a coherent set
+                    and wired into a Principled BSDF graph.
+                </p>
+                <span class="cap__tag">Shading</span>
+            </article>
+
+            <article class="cap">
+                <span class="cap__num">04</span>
+                <h3 class="cap__title">Smart Retopology</h3>
+                <p class="cap__body">
+                    Convert dense scans into production topology with edge flow
+                    suggestions. Edit, lock, and re-bake.
+                </p>
+                <span class="cap__tag">Mesh</span>
+            </article>
+
+            <article class="cap">
+                <span class="cap__num">05</span>
+                <h3 class="cap__title">UV Assistant</h3>
+                <p class="cap__body">
+                    Seam proposals, automatic unwrap, and pack tuning — with a
+                    preview before any change is committed.
+                </p>
+                <span class="cap__tag">Mesh</span>
+            </article>
+
+            <article class="cap">
+                <span class="cap__num">06</span>
+                <h3 class="cap__title">HDRI Synthesis</h3>
+                <p class="cap__body">
+                    Author lighting from a written brief. Spherical, seamless,
+                    and exposure-balanced for Cycles or EEVEE.
+                </p>
+                <span class="cap__tag">Lighting</span>
+            </article>
+
+            <article class="cap">
+                <span class="cap__num">07</span>
+                <h3 class="cap__title">Reference Boards</h3>
+                <p class="cap__body">
+                    Build moodboards inside Blender. Pin references, group by theme,
+                    and reuse them as prompts.
+                </p>
+                <span class="cap__tag">Workflow</span>
+            </article>
+
+            <article class="cap">
+                <span class="cap__num">08</span>
+                <h3 class="cap__title">Asset Library</h3>
+                <p class="cap__body">
+                    Every result is saved to a local library with metadata, prompts,
+                    and seeds. Iterate without losing your work.
+                </p>
+                <span class="cap__tag">Workflow</span>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- ============ WORKFLOW ============ -->
+<section class="section section--alt" id="workflow">
+    <div class="container">
+        <header class="section__head section__head--split">
+            <div>
+                <span class="eyebrow">02 — Workflow</span>
+                <h2 class="h2">Generate.<br>Iterate.<br>Import.</h2>
+            </div>
+            <p class="lede">
+                The addon is built around three phases. Each phase stays inside
+                Blender, uses native data blocks, and never forces an external app.
+            </p>
+        </header>
+
+        <ol class="flow">
+            <li class="flow__step">
+                <header class="flow__head">
+                    <span class="flow__num">01</span>
+                    <h3 class="flow__title">Brief</h3>
+                </header>
+                <p class="flow__body">
+                    Write a prompt or drop an image. Set scale, polycount target,
+                    and style references. Save as a preset.
+                </p>
+                <ul class="flow__list">
+                    <li>Prompt or image input</li>
+                    <li>Scene-aware scale</li>
+                    <li>Reusable presets</li>
+                </ul>
+            </li>
+
+            <li class="flow__step">
+                <header class="flow__head">
+                    <span class="flow__num">02</span>
+                    <h3 class="flow__title">Iterate</h3>
+                </header>
+                <p class="flow__body">
+                    Generate variants in parallel. Compare side by side, lock parts
+                    you like, regenerate the rest. No file juggling.
+                </p>
+                <ul class="flow__list">
+                    <li>Variant grid</li>
+                    <li>Region locking</li>
+                    <li>Seed control</li>
+                </ul>
+            </li>
+
+            <li class="flow__step">
+                <header class="flow__head">
+                    <span class="flow__num">03</span>
+                    <h3 class="flow__title">Import</h3>
+                </header>
+                <p class="flow__body">
+                    Bring the chosen result into your scene as a real mesh with
+                    materials, UVs, and a clean modifier stack.
+                </p>
+                <ul class="flow__list">
+                    <li>Native mesh data</li>
+                    <li>Editable shader graph</li>
+                    <li>Non-destructive setup</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+</section>
+
+<!-- ============ BLENDER INTEGRATION ============ -->
+<section class="section" id="integration">
+    <div class="container integration">
+        <div class="integration__copy">
+            <span class="eyebrow">03 — Blender Integration</span>
+            <h2 class="h2">Built on top of Blender, not beside it.</h2>
+            <p class="lede">
+                AI Toolkit installs as a native addon. It uses Blender operators,
+                respects undo, supports the Asset Browser, and ships with keymaps
+                you can edit.
+            </p>
+
+            <dl class="kv">
+                <div class="kv__row">
+                    <dt>Engines</dt>
+                    <dd>Cycles · EEVEE Next</dd>
+                </div>
+                <div class="kv__row">
+                    <dt>Versions</dt>
+                    <dd>Blender 4.0 — 4.3</dd>
+                </div>
+                <div class="kv__row">
+                    <dt>Platform</dt>
+                    <dd>Windows · macOS · Linux</dd>
+                </div>
+                <div class="kv__row">
+                    <dt>Install</dt>
+                    <dd>Single .zip · Preferences → Add-ons</dd>
+                </div>
+                <div class="kv__row">
+                    <dt>Data</dt>
+                    <dd>Local cache · BYO API key</dd>
+                </div>
+            </dl>
+
+            <div class="integration__cta">
+                <a href="#docs" class="btn btn--ghost">Install guide →</a>
+            </div>
+        </div>
+
+        <div class="integration__preview">
+            <figure class="window">
+                <header class="window__bar">
+                    <span class="window__buttons">
+                        <span></span><span></span><span></span>
+                    </span>
+                    <span class="window__title">Blender 4.3 — scene_01.blend</span>
+                </header>
+                <div class="window__body">
+                    <div class="window__viewport">
+                        <span class="window__hint">Viewport</span>
+                        <div class="gizmo"></div>
+                        <div class="grid-floor"></div>
+                    </div>
+                    <aside class="window__sidebar">
+                        <div class="side-section">
+                            <span class="side-section__title">AI Toolkit</span>
+                        </div>
+                        <div class="side-row"><span>Mode</span><b>Image → Mesh</b></div>
+                        <div class="side-row"><span>Variants</span><b>4</b></div>
+                        <div class="side-row"><span>Polycount</span><b>~12k</b></div>
+                        <div class="side-row"><span>Seed</span><b>0×8a91</b></div>
+                        <div class="side-bar"><i></i></div>
+                        <div class="side-actions">
+                            <button class="panel__btn panel__btn--primary">Run</button>
+                            <button class="panel__btn">Save</button>
+                        </div>
+                    </aside>
+                </div>
+            </figure>
+        </div>
+    </div>
+</section>
+
+<!-- ============ SHOWCASE ============ -->
+<section class="section section--alt" id="showcase">
+    <div class="container">
+        <header class="section__head section__head--split">
+            <div>
+                <span class="eyebrow">04 — Showcase</span>
+                <h2 class="h2">Made with the toolkit.</h2>
+            </div>
+            <p class="lede">
+                A small selection of work generated, refined, and rendered inside
+                Blender by artists using the addon.
+            </p>
+        </header>
+
+        <div class="gallery">
+            <figure class="tile tile--tall">
+                <div class="tile__media" data-label="01"></div>
+                <figcaption class="tile__cap">
+                    <span>Concrete props</span>
+                    <em>Image → Mesh · 9.2k tris</em>
+                </figcaption>
+            </figure>
+            <figure class="tile">
+                <div class="tile__media" data-label="02"></div>
+                <figcaption class="tile__cap">
+                    <span>Material study</span>
+                    <em>PBR · 4 maps</em>
+                </figcaption>
+            </figure>
+            <figure class="tile">
+                <div class="tile__media" data-label="03"></div>
+                <figcaption class="tile__cap">
+                    <span>Environment kit</span>
+                    <em>Text → Mesh</em>
+                </figcaption>
+            </figure>
+            <figure class="tile tile--wide">
+                <div class="tile__media" data-label="04"></div>
+                <figcaption class="tile__cap">
+                    <span>Hard-surface set</span>
+                    <em>Retopo · Hand-finished</em>
+                </figcaption>
+            </figure>
+            <figure class="tile">
+                <div class="tile__media" data-label="05"></div>
+                <figcaption class="tile__cap">
+                    <span>HDRI brief</span>
+                    <em>Lighting · 8k</em>
+                </figcaption>
+            </figure>
+        </div>
+    </div>
+</section>
+
+<!-- ============ DOCS / KNOWLEDGE HUB ============ -->
+<section class="section" id="docs">
+    <div class="container">
+        <header class="section__head section__head--split">
+            <div>
+                <span class="eyebrow">05 — Manual</span>
+                <h2 class="h2">A knowledge hub<br>that grows with you.</h2>
+            </div>
+            <p class="lede">
+                Install steps, tutorials, API setup, and field-tested recipes.
+                The hub is structured so new guides slot in without breaking the system.
+            </p>
+        </header>
+
+        <div class="docs">
+            <a class="doc" href="#">
+                <span class="doc__cat">Getting started</span>
+                <h3 class="doc__title">Install the addon in 3 steps</h3>
+                <p class="doc__body">Download, enable in Preferences, and verify the connection. About 4 minutes.</p>
+                <span class="doc__meta">Guide · 4 min</span>
+            </a>
+
+            <a class="doc" href="#">
+                <span class="doc__cat">Setup</span>
+                <h3 class="doc__title">Connect your AI provider</h3>
+                <p class="doc__body">Bring your own API key. We never proxy your prompts. Storage and rotation explained.</p>
+                <span class="doc__meta">Guide · 6 min</span>
+            </a>
+
+            <a class="doc" href="#">
+                <span class="doc__cat">Workflow</span>
+                <h3 class="doc__title">From prompt to production mesh</h3>
+                <p class="doc__body">A repeatable path from brief to a clean, UV-unwrapped, textured asset.</p>
+                <span class="doc__meta">Tutorial · 12 min</span>
+            </a>
+
+            <a class="doc" href="#">
+                <span class="doc__cat">Workflow</span>
+                <h3 class="doc__title">Iteration with locked regions</h3>
+                <p class="doc__body">Keep what works. Regenerate the rest. A non-destructive iteration loop.</p>
+                <span class="doc__meta">Tutorial · 9 min</span>
+            </a>
+
+            <a class="doc" href="#">
+                <span class="doc__cat">Reference</span>
+                <h3 class="doc__title">Operator and panel reference</h3>
+                <p class="doc__body">Every operator the addon registers, with its arguments and keymap entry.</p>
+                <span class="doc__meta">Reference</span>
+            </a>
+
+            <a class="doc" href="#">
+                <span class="doc__cat">Reference</span>
+                <h3 class="doc__title">FAQ &amp; troubleshooting</h3>
+                <p class="doc__body">Common errors, performance tips, and recovery from failed generations.</p>
+                <span class="doc__meta">FAQ</span>
+            </a>
+        </div>
+
+        <a href="#" class="docs__more">Browse the full manual →</a>
+    </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section section--alt" id="faq">
+    <div class="container faq">
+        <header class="section__head">
+            <span class="eyebrow">06 — FAQ</span>
+            <h2 class="h2">Quick answers.</h2>
+        </header>
+
+        <div class="faq__list">
+            <details class="qa">
+                <summary>Does it work offline?</summary>
+                <p>Generation requires an AI provider, so an internet connection is needed for that step. Everything else — managing assets, refining meshes, browsing the library — works offline.</p>
+            </details>
+            <details class="qa">
+                <summary>Which provider does it use?</summary>
+                <p>You bring your own key. The addon supports a small set of providers per modality. Keys are stored locally and never proxied through us.</p>
+            </details>
+            <details class="qa">
+                <summary>Is the output usable in production?</summary>
+                <p>Geometry is generated as quads with topology hints. Materials use the standard Principled BSDF. Heavy results can be retopologized in one click.</p>
+            </details>
+            <details class="qa">
+                <summary>Can I use generated assets commercially?</summary>
+                <p>That depends on the provider you use. The addon does not add restrictions on top. Check your provider's terms.</p>
+            </details>
+            <details class="qa">
+                <summary>Will it ever stop being a Blender-only tool?</summary>
+                <p>No. The addon is designed for Blender, and we have no plans to dilute that focus.</p>
+            </details>
+        </div>
+    </div>
+</section>
+
+<!-- ============ DOWNLOAD / CTA ============ -->
+<section class="section cta" id="download">
+    <div class="container cta__inner">
+        <span class="eyebrow">07 — Get the addon</span>
+        <h2 class="display display--cta">
+            Install once.<br>
+            Iterate forever.
+        </h2>
+        <div class="cta__actions">
+            <a href="#" class="btn btn--solid btn--lg">Download .zip — 24 MB</a>
+            <a href="#docs" class="btn btn--ghost btn--lg">Read the manual</a>
+        </div>
+        <p class="cta__note">Free for personal projects · Pro license for studios</p>
+    </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+    <div class="container footer__grid">
+        <div class="footer__brand">
+            <span class="nav__mark">◣</span>
+            <h3>AI Toolkit</h3>
+            <p>Creative AI inside Blender.</p>
+        </div>
+        <div class="footer__col">
+            <h4>Product</h4>
+            <a href="#capabilities">Capabilities</a>
+            <a href="#workflow">Workflow</a>
+            <a href="#integration">Integration</a>
+            <a href="#download">Download</a>
+        </div>
+        <div class="footer__col">
+            <h4>Learn</h4>
+            <a href="#docs">Manual</a>
+            <a href="#docs">Tutorials</a>
+            <a href="#faq">FAQ</a>
+            <a href="#docs">Changelog</a>
+        </div>
+        <div class="footer__col">
+            <h4>Community</h4>
+            <a href="#">Discord</a>
+            <a href="#">GitHub</a>
+            <a href="#">Blender Artists</a>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+    <div class="container footer__legal">
+        <span>© 2026 AI Toolkit</span>
+        <span>Not affiliated with the Blender Foundation.</span>
+    </div>
+</footer>
+
+<script src="app.js"></script>
 </body>
 </html>
