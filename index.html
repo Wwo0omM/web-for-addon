@@ -8,6 +8,7 @@
     <link rel="icon" type="image/png" href="site_icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script>(function(){try{var t=localStorage.getItem('aitk-theme');if(!t){t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -28,7 +29,7 @@
             <a href="#showcase">Showcase</a>
             <a href="#docs">Docs</a>
         </nav>
-        <div class="nav__actions">
+        <div class="nav__actions"><button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle theme"><span class="theme-toggle__track"><span class="theme-toggle__thumb"></span></span></button>
             <a href="#docs" class="link-quiet">Manual</a>
             <a href="#download" class="btn btn--solid">Download</a>
         </div>
@@ -42,7 +43,7 @@
 
 <!-- ============ HERO ============ -->
 <section class="hero">
-    <div class="container hero__grid">
+    <canvas class="hero__bg" id="heroBg" aria-hidden="true"></canvas><div class="container hero__grid">
         <div class="hero__meta">
             <span class="eyebrow">v 1.4 — Blender 4.x</span>
         </div>
@@ -79,7 +80,7 @@
                     </div>
                     <div class="panel__row panel__row--input">
                         <span class="panel__label">Prompt</span>
-                        <span class="panel__value panel__value--mono">a brutalist concrete bench, weathered</span>
+                        <span class="panel__value panel__value--mono" id="mockPrompt">a brutalist concrete bench, weathered</span>
                     </div>
                     <div class="panel__row">
                         <span class="panel__label">Topology</span>
@@ -87,10 +88,10 @@
                     </div>
                     <div class="panel__row">
                         <span class="panel__label">Status</span>
-                        <span class="panel__value panel__value--accent">Ready to import</span>
+                        <span class="panel__value panel__value--accent" id="mockStatus">Ready to import</span>
                     </div>
                     <div class="panel__progress">
-                        <div class="panel__progress-bar"></div>
+                        <div class="panel__progress-bar" id="mockProgress"></div>
                     </div>
                     <div class="panel__actions">
                         <button class="panel__btn panel__btn--primary">Generate</button>
@@ -136,6 +137,68 @@
         <span>Image → Mesh</span><span>·</span>
         <span>PBR Materials</span><span>·</span>
         <span>Retopology</span><span>·</span>
+    </div>
+</section>
+
+<!-- ============ TRY IT (interactive demo) ============ -->
+<section class="section section--alt" id="try">
+    <div class="container">
+        <header class="section__head section__head--split">
+            <div>
+                <span class="eyebrow">Try it — Text to 3D</span>
+                <h2 class="h2">Type a prompt.<br>Watch it build.</h2>
+            </div>
+            <p class="lede">An animated preview of the Text to 3D module — type or pick a prompt and watch a mesh take shape. No download required.</p>
+        </header>
+        <div class="demo">
+            <div class="demo__stage">
+                <span class="demo__badge">animated preview</span>
+                <span class="demo__status" id="demoStatus">Ready</span>
+                <svg class="demo__svg" id="demoSvg" viewBox="0 0 400 320" fill="none" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
+                    <g class="demo__obj" data-obj="chair">
+                        <polygon class="draw fill" pathLength="1" points="150,176 250,176 272,190 172,190"/>
+                        <line class="draw" pathLength="1" x1="156" y1="176" x2="161" y2="86"/>
+                        <line class="draw" pathLength="1" x1="161" y1="86" x2="212" y2="92"/>
+                        <line class="draw" pathLength="1" x1="170" y1="120" x2="206" y2="125"/>
+                        <line class="draw" pathLength="1" x1="170" y1="146" x2="206" y2="150"/>
+                        <line class="draw" pathLength="1" x1="160" y1="190" x2="150" y2="262"/>
+                        <line class="draw" pathLength="1" x1="246" y1="190" x2="256" y2="262"/>
+                        <line class="draw" pathLength="1" x1="172" y1="190" x2="172" y2="258"/>
+                    </g>
+                    <g class="demo__obj" data-obj="vase">
+                        <ellipse class="draw" pathLength="1" cx="200" cy="96" rx="34" ry="9"/>
+                        <path class="draw fill" pathLength="1" d="M166 96 C150 140 152 184 188 212 C196 219 204 219 212 212 C248 184 250 140 234 96"/>
+                        <ellipse class="draw" pathLength="1" cx="200" cy="150" rx="44" ry="11"/>
+                        <ellipse class="draw" pathLength="1" cx="200" cy="186" rx="36" ry="9"/>
+                    </g>
+                    <g class="demo__obj" data-obj="tree">
+                        <polygon class="draw fill" pathLength="1" points="188,252 188,218 212,218 212,252"/>
+                        <polygon class="draw fill" pathLength="1" points="140,224 260,224 200,158"/>
+                        <polygon class="draw fill" pathLength="1" points="150,186 250,186 200,128"/>
+                        <polygon class="draw fill" pathLength="1" points="162,150 238,150 200,98"/>
+                        <line class="draw" pathLength="1" x1="200" y1="158" x2="200" y2="224"/>
+                        <line class="draw" pathLength="1" x1="200" y1="128" x2="170" y2="186"/>
+                        <line class="draw" pathLength="1" x1="200" y1="128" x2="230" y2="186"/>
+                    </g>
+                </svg>
+            </div>
+            <div class="demo__controls">
+                <label class="demo__field">
+                    <span class="demo__label">Prompt</span>
+                    <input id="demoInput" type="text" class="demo__input" value="a wooden chair" autocomplete="off" spellcheck="false">
+                </label>
+                <div class="demo__chips">
+                    <button type="button" class="chip" data-obj="chair" data-prompt="a wooden chair">a wooden chair</button>
+                    <button type="button" class="chip" data-obj="vase" data-prompt="a ceramic vase">a ceramic vase</button>
+                    <button type="button" class="chip" data-obj="tree" data-prompt="a low-poly pine tree">a low-poly pine tree</button>
+                </div>
+                <div class="demo__actions">
+                    <button type="button" class="btn btn--solid" id="demoGen">Generate</button>
+                    <button type="button" class="btn btn--ghost" id="demoStop">Stop</button>
+                </div>
+                <p class="demo__note">Visual concept of the Text to 3D workflow. Real generation runs inside Blender.</p>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -371,6 +434,71 @@
                     </aside>
                 </div>
             </figure>
+        </div>
+    </div>
+</section>
+
+<!-- ============ BEFORE / AFTER ============ -->
+<section class="section" id="compare">
+    <div class="container">
+        <header class="section__head section__head--split">
+            <div>
+                <span class="eyebrow">Image to 3D</span>
+                <h2 class="h2">From reference<br>to render-ready mesh.</h2>
+            </div>
+            <p class="lede">Drag the handle to compare a reference image with the generated, game-ready mesh — same object, same angle.</p>
+        </header>
+        <div class="ba" id="ba" role="slider" aria-label="Before and after comparison" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0">
+            <!-- AFTER: generated mesh (full, underneath) -->
+            <div class="ba__layer ba__after">
+                <svg class="ba__svg" viewBox="0 0 600 420" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                    <defs>
+                        <pattern id="meshGrid" width="26" height="26" patternUnits="userSpaceOnUse">
+                            <path d="M26 0H0V26" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.18"/>
+                        </pattern>
+                    </defs>
+                    <rect width="600" height="420" fill="url(#meshGrid)"/>
+                    <g class="ba__mesh" transform="translate(300,40)" fill="none" stroke-linejoin="round">
+                        <ellipse cx="0" cy="70" rx="52" ry="14"/>
+                        <path d="M-52 70 C-78 150 -74 230 -8 286 C-2 290 2 290 8 286 C74 230 78 150 52 70"/>
+                        <ellipse cx="0" cy="150" rx="68" ry="18"/>
+                        <ellipse cx="0" cy="210" rx="60" ry="16"/>
+                        <ellipse cx="0" cy="266" rx="40" ry="11"/>
+                        <line x1="-52" y1="70" x2="-68" y2="150"/>
+                        <line x1="52" y1="70" x2="68" y2="150"/>
+                        <line x1="0" y1="56" x2="0" y2="286"/>
+                    </g>
+                </svg>
+                <span class="ba__tag ba__tag--right">Generated mesh</span>
+            </div>
+            <!-- BEFORE: reference photo (clipped on top) -->
+            <div class="ba__layer ba__before" id="baBefore">
+                <svg class="ba__svg" viewBox="0 0 600 420" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                    <defs>
+                        <radialGradient id="photoBg" cx="40%" cy="30%" r="90%">
+                            <stop offset="0%" stop-color="#e9e2d4"/>
+                            <stop offset="100%" stop-color="#b7ab95"/>
+                        </radialGradient>
+                        <linearGradient id="vaseFill" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#f2ede2"/>
+                            <stop offset="55%" stop-color="#cbb89a"/>
+                            <stop offset="100%" stop-color="#8f7d61"/>
+                        </linearGradient>
+                    </defs>
+                    <rect width="600" height="420" fill="url(#photoBg)"/>
+                    <ellipse cx="300" cy="360" rx="120" ry="22" fill="#000" opacity="0.16"/>
+                    <g transform="translate(300,40)">
+                        <path d="M-52 70 C-78 150 -74 230 -8 286 C-2 290 2 290 8 286 C74 230 78 150 52 70 C40 64 -40 64 -52 70 Z" fill="url(#vaseFill)"/>
+                        <ellipse cx="0" cy="70" rx="52" ry="14" fill="#6f6048" opacity="0.5"/>
+                        <ellipse cx="0" cy="70" rx="40" ry="9" fill="#2c2418"/>
+                        <path d="M-30 96 C-40 160 -36 226 -2 274" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" opacity="0.28"/>
+                    </g>
+                </svg>
+                <span class="ba__tag ba__tag--left">Reference</span>
+            </div>
+            <div class="ba__handle" id="baHandle">
+                <span class="ba__grip" aria-hidden="true"></span>
+            </div>
         </div>
     </div>
 </section>
